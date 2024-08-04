@@ -48,16 +48,18 @@ logging.basicConfig(filename='log/202406.log', level=logging.CRITICAL, format=LO
 # handle commands
 @bot.on_message
 async def _(event: Event):
-
     gid = event.group_id # 群号 / message.private -> None
     uid = event.user_id # QQ号
     message_id = event.message_id
 
-    message = unescape(event.message)
-    message_cq = message_to_cq(message).strip()
-
     if uid == event.self_id or gid in [624670021, 366591885, 730020933, 332135728]: # 过滤掉自己发送的消息
         return
+    
+    if gid not in [928327528, 121271634, 136880140, 203275784, None]:
+        return
+
+    message = unescape(event.message)
+    message_cq = message_to_cq(message).strip()
 
     print(uid, gid, message_id, message_cq)
     sender = event.sender # message.private -> {} / message.group ->　dataがある

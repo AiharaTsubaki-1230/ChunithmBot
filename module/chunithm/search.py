@@ -53,7 +53,7 @@ class SearchSong():
                     f'物量: {music_data["data"]["BAS"]["note"]["total"]}/{music_data["data"]["ADV"]["note"]["total"]}/{music_data["data"]["EXP"]["note"]["total"]}/{music_data["data"]["MAS"]["note"]["total"]}/{music_data["data"]["ULT"]["note"]["total"]}'
                 ]:
                     # 主要针对最后两行, 如果没有ULTIMA难度的数据就把最后面的/去掉
-                    message += line.rstrip("0.0").rstrip("/") + "\n"
+                    message += (line[:-4] if line.endswith("/0.0") else line.strip("/")) + "\n"
                 return message + MessageSegment.image(file=f"file:///{path}/src/chunithm/image/{query}.jpg")
             case _:
                 message = ""
